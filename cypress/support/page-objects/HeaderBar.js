@@ -10,7 +10,7 @@ class HeaderBar {
     return cy.get("#hamburgermenu", { timeout: 20000 }); // Increased timeout for menu to appear
   }
   get mediaMenuItem() {
-    return cy.contains("Media");
+    return cy.get("#hamburgermenu-media");
   }
   get newsMenuItem() {
     return cy.contains("News");

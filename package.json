@@ -1,0 +1,19 @@
+{
+  "name": "cdl-tech-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "add": "^2.0.6",
+    "cypress": "^15.3.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
+    "prettier-eslint": "^16.4.2"
+  }
+}

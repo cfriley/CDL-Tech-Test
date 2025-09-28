@@ -10,13 +10,17 @@ class HeaderBar {
     return cy.get("#hamburgermenu", { timeout: 20000 }); // Increased timeout for menu to appear
   }
   get mediaMenuItem() {
-    return cy.get("#hamburgermenu-media");
+    return cy
+      .get("#hamburgermenu-media.hamburgermenuitem.fontfill.tier1.toggle")
+      .scrollIntoView();
   }
   get newsMenuItem() {
     return cy.contains("News");
   }
   get careersMenuItem() {
-    return cy.get("#hamburgermenu-careers");
+    return cy.get(
+      "#hamburgermenu-careers.hamburgermenuitem.fontfill.tier1.toggle",
+    );
   }
 
   // Actions
@@ -35,31 +39,41 @@ class HeaderBar {
     this.hamburgerIcon.should("exist").and("not.be.disabled").click();
 
     // Wait for menu to be visible and fully expanded
-    this.hamburgerMenu.should("exist");
+    this.hamburgerMenu.should("exist").and("be.visible");
 
-    // Additional wait for menu items to be ready
-    this.waitForMenuReady();
+    // Wait for menu items to be present before proceeding
+    cy.get("#hamburgermenu-media.hamburgermenuitem.fontfill.tier1.toggle", {
+      timeout: 10000,
+    }).should("exist");
 
     return this;
   }
 
   navigateToNews() {
     this.openHamburgerMenu();
-    this.mediaMenuItem.should("exist").click();
-    this.newsMenuItem.should("exist").click();
+    this.mediaMenuItem.should("exist").and("be.visible").click();
+    this.newsMenuItem.should("exist").and("be.visible").click();
     return this;
   }
 
   navigateToCareers() {
     this.openHamburgerMenu();
-    this.careersMenuItem.should("exist").click();
+    this.careersMenuItem.should("exist").and("be.visible").click();
     return this;
   }
 
   // Wait for menu to be fully expanded and interactive
   waitForMenuReady() {
     // Wait for the hamburger menu to be visible and have completed its transition
-    this.hamburgerMenu.should("exist");
+    this.hamburgerMenu.should("exist").and("be.visible");
+
+    // Wait for menu items to be present and visible
+    cy.get("#hamburgermenu-media.hamburgermenuitem.fontfill.tier1.toggle", {
+      timeout: 10000,
+    }).should("exist");
+    cy.get("#hamburgermenu-careers.hamburgermenuitem.fontfill.tier1.toggle", {
+      timeout: 10000,
+    }).should("exist");
 
     return this;
   }

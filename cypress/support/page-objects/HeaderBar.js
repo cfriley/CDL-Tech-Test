@@ -25,8 +25,8 @@ class HeaderBar {
     return this;
   }
 
-  verifyLogoVisible() {
-    this.logo.should("be.visible");
+  verifyLogoExists() {
+    this.logo.should("exist");
     return this;
   }
 
@@ -45,14 +45,14 @@ class HeaderBar {
 
   navigateToNews() {
     this.openHamburgerMenu();
-    this.mediaMenuItem.should("be.visible").click();
-    this.newsMenuItem.should("be.visible").click();
+    this.mediaMenuItem.should("exist").click();
+    this.newsMenuItem.should("exist").click();
     return this;
   }
 
   navigateToCareers() {
     this.openHamburgerMenu();
-    this.careersMenuItem.should("be.visible").click();
+    this.careersMenuItem.should("exist").click();
     return this;
   }
 

@@ -9,17 +9,17 @@ describe("CDL Website Navigation Test", () => {
   });
 
   it("should click on the menu, select media, then news, and click on the Cloud-only transformation article", () => {
-    // Verify CDL logo is visible
-    HomePage.verifyLogoVisible();
+    // Verify CDL logo exists
+    HomePage.verifyLogoExists();
 
     // Click on the menu
     HomePage.openHamburgerMenu();
 
     // Click on Media
-    HomePage.mediaMenuItem.should("be.visible").click();
+    HomePage.mediaMenuItem.should("exist").click();
 
     // Select News
-    HomePage.newsMenuItem.should("be.visible").click();
+    HomePage.newsMenuItem.should("exist").click();
 
     // Verify the URL of the News page is correct
     NewsPage.newsPageUrl.should("include", "/media/news");

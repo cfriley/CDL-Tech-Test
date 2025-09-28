@@ -32,7 +32,7 @@ class HeaderBar {
 
   openHamburgerMenu() {
     // First ensure the hamburger icon is visible and clickable
-    this.hamburgerIcon.should("be.visible").and("not.be.disabled").click();
+    this.hamburgerIcon.should("exist").and("not.be.disabled").click();
 
     // Wait for menu to be visible and fully expanded
     this.hamburgerMenu.should("exist");

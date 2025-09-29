@@ -8,7 +8,7 @@ describe("CDL Website Navigation Test", () => {
     cy.visit("/");
   });
 
-  it("should click on the menu, select media, then news, and click on the Cloud-only transformation article", () => {
+  it("should navigate to the news page, click on the Cloud-only transformation article, then navigate to career vacancies, search for developer and open the role overview", () => {
     // Verify CDL logo exists
     HomePage.verifyLogoExists();
 
@@ -16,10 +16,14 @@ describe("CDL Website Navigation Test", () => {
     HomePage.openHamburgerMenu();
 
     // Click on Media
-    HomePage.mediaMenuItem.should("exist").click();
+    HomePage.mediaMenuItem.should("exist").click({ force: true });
 
-    // Select News
-    HomePage.newsMenuItem.should("exist").click();
+    // Select News:
+    // As per comment on HeaderBar.js lines 16-24
+    // if using the commented-out method from HeaderBar instead, line 26 should be replaced with line 25 below
+
+    // HomePage.newsMenuItem.should("exist").click();
+    HomePage.menuItem("News").should("exist").click({ force: true });
 
     // Verify the URL of the News page is correct
     NewsPage.newsPageUrl.should("include", "/media/news");
@@ -33,8 +37,9 @@ describe("CDL Website Navigation Test", () => {
       "Cloud_only_transformation",
     );
 
-    // Navigate back to News page via browser back button
-    // cy.go("back");
+    // Navigate back to News page via footer link
+    // cy.go("back") is also possible here
+
     CloudArticlePage.navigateBack();
 
     // Assert the news video pad exists and news page is loaded
@@ -42,8 +47,8 @@ describe("CDL Website Navigation Test", () => {
 
     // Click on the menu again and select Careers, then vacancies
     NewsPage.openHamburgerMenu();
-    HomePage.careersMenuItem.should("exist").click({ force: true });
-    HomePage.waitForMenuReady();
+    NewsPage.waitForMenuReady();
+    NewsPage.careersMenuItem.should("exist").click({ force: true });
     cy.contains("Vacancies").should("exist").click({ force: true });
 
     // Wait for the Vacancies page to load

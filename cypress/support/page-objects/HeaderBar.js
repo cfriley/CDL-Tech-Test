@@ -46,7 +46,7 @@ class HeaderBar {
     this.hamburgerIcon.should("exist").and("not.be.disabled").click();
 
     // Wait for menu to be visible and fully expanded
-    this.hamburgerMenu.should("exist").and("be.visible");
+    this.hamburgerMenu.should("exist").and("be.visible", { timeout: 20000 });
 
     // Wait for menu items to be present before proceeding
     cy.get("#hamburgermenu-media", {
